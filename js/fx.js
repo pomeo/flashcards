@@ -1,8 +1,13 @@
 $(document).ready(function() {
-    if($(".b-card").length) {
-      
-    } else {
-      
+    if(!($(".b-card").length)) {
+      var word = {word: "example", transcription: "[ɪg'zɑːmpl]", translate: "пример"};
+      var encoded = $.toJSON(word);
+      if ($.jStorage.get(1)) {
+        listw();
+      } else {
+        $.jStorage.set(1,encoded);
+        listw();
+      }
     }
     $("#closebox").click(function(){
         $(".b-overlay").addClass("g-hidden");
@@ -72,6 +77,8 @@ $(document).ready(function() {
         $(this).parent().fadeOut(700, function(){
             $(this).remove();
           });
+        var id = $(this).parent().attr("id").slice(2);
+        $.jStorage.deleteKey(id);
       });
     
     var options = {
@@ -85,24 +92,52 @@ $(document).ready(function() {
 function showRequest(formData, jqForm, options) {
   var queryString = decodeURIComponent($.param(formData).slice(5));
   var queryString = queryString.replace(/\+/, " ");
-  
-  if($(".b-card:first").length) {
-    $("<div class=\"b-card g-without-trans\"><ul class=\"b-card-box\"><li class=\"b-card-info\">Чтобы отредактировать кликните на слово, после изменений нажмите ввод. Когда закончите нажмите на зеленый значок справа вверху</li><li class=\"b-card-word-info\">слово</li><li class=\"b-card-word\">" + queryString + "</li><li class=\"b-card-transcription-info\">транскрипция</li><li class=\"b-card-transcription\"></li><li class=\"b-card-translate-info\">перевод</li><li class=\"b-card-translate\"></li></ul><a class=\"b-card-edit g-hidden\" href=\"#\" title=\"редактировать карту\"></a><a class=\"b-card-delete g-hidden\" href=\"#\" title=\"удалить карту\"></a><a class=\"b-card-accept g-hidden\" href=\"#\" title=\"сохранить\"></a></div>").fadeIn(700).insertBefore(".b-card:first");
-  } else {
-    $("<div class=\"b-card g-without-trans\"><ul class=\"b-card-box\"><li class=\"b-card-info\">Чтобы отредактировать кликните на слово, после изменений нажмите ввод. Когда закончите нажмите на зеленый значок справа вверху</li><li class=\"b-card-word-info\">слово</li><li class=\"b-card-word\">" + queryString + "</li><li class=\"b-card-transcription-info\">транскрипция</li><li class=\"b-card-transcription\"></li><li class=\"b-card-translate-info\">перевод</li><li class=\"b-card-translate\"></li></ul><a class=\"b-card-edit g-hidden\" href=\"#\" title=\"редактировать карту\"></a><a class=\"b-card-delete g-hidden\" href=\"#\" title=\"удалить карту\"></a><a class=\"b-card-accept g-hidden\" href=\"#\" title=\"сохранить\"></a></div>").fadeIn(700).insertAfter(".b-box");
-  }
 
   $.translate(queryString, "en", "ru", {
     complete:function(){
-        $(".b-card:first > .b-card-box > .b-card-translate").text(this.translation);
+        var id = (parseInt(($.jStorage.index()).slice(-1)))+1;
+        console.log(id);
+        var word = {word: queryString, transcription: "", translate: this.translation};
+        var encoded = $.toJSON(word);
+        $.jStorage.set(id,encoded);
+        gener(queryString,"",this.translation,id);
       }
     });
   
   return true;
 }
 
+function gener(a, b, c, id) {
+  if (!b) {
+    b = '';
+  }
+  if (!c) {
+    c = '';
+  }
+  if (!id) {
+    id = '';
+  }
+  if ($(".b-card:first").length) {
+    $("<div id=\"id" + id + "\" class=\"b-card g-without-trans\"><ul class=\"b-card-box\"><li class=\"b-card-info\">Чтобы отредактировать кликните на слово, после изменений нажмите ввод. Когда закончите нажмите на зеленый значок справа вверху</li><li class=\"b-card-word-info\">слово</li><li class=\"b-card-word\">" + a + "</li><li class=\"b-card-transcription-info\">транскрипция</li><li class=\"b-card-transcription\">" + b + "</li><li class=\"b-card-translate-info\">перевод</li><li class=\"b-card-translate\">" + c + "</li></ul><a class=\"b-card-edit g-hidden\" href=\"#\" title=\"редактировать карту\"></a><a class=\"b-card-delete g-hidden\" href=\"#\" title=\"удалить карту\"></a><a class=\"b-card-accept g-hidden\" href=\"#\" title=\"сохранить\"></a></div>").fadeIn(700).insertBefore(".b-card:first");
+  } else {
+    $("<div id=\"id" + id + "\" class=\"b-card g-without-trans\"><ul class=\"b-card-box\"><li class=\"b-card-info\">Чтобы отредактировать кликните на слово, после изменений нажмите ввод. Когда закончите нажмите на зеленый значок справа вверху</li><li class=\"b-card-word-info\">слово</li><li class=\"b-card-word\">" + a + "</li><li class=\"b-card-transcription-info\">транскрипция</li><li class=\"b-card-transcription\">" + b + "</li><li class=\"b-card-translate-info\">перевод</li><li class=\"b-card-translate\">" + c + "</li></ul><a class=\"b-card-edit g-hidden\" href=\"#\" title=\"редактировать карту\"></a><a class=\"b-card-delete g-hidden\" href=\"#\" title=\"удалить карту\"></a><a class=\"b-card-accept g-hidden\" href=\"#\" title=\"сохранить\"></a></div>").fadeIn(700).insertAfter(".b-box");
+  }
+}
+
 function limiter(fild, size) {
   if (fild.value.length > size) {
     fild.value = fild.value.substring(0, size);
   }
+}
+
+function listw() {
+  var index = $.jStorage.index();
+  index.forEach(function(i){
+      var w = $.jStorage.get(i);
+      var word = $.evalJSON(w).word;
+      var transcription = $.evalJSON(w).transcription;
+      var translate = $.evalJSON(w).translate;
+      gener(word,transcription,translate,i);
+      console.log(word);
+    });
 }
