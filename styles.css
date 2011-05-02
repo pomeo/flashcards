@@ -39,6 +39,11 @@ html,body {
     -webkit-box-shadow:0px 0px 7px #555;
     box-shadow:0px 0px 7px #555;
 }
+.b-card.g-edit {
+    -moz-box-shadow:0px 0px 7px #555;
+    -webkit-box-shadow:0px 0px 7px #555;
+    box-shadow:0px 0px 7px #555;
+}
 .b-card-word {
     text-align:center;
     font:18px Georgia, serif;
@@ -73,6 +78,58 @@ html,body {
 }
 .g-without-trans .b-card-translate {
     padding-top:60px;
+}
+.b-card-info {
+    display:none;
+}
+.g-edit .b-card-info {
+    display:block;
+    font-size:9px;
+}
+.b-card-word-info {
+    display:none;
+}
+.g-edit .b-card-word-info {
+    display:block;
+    font-size:9px;
+    padding:0px 10px;
+    text-align:center;
+}
+.g-active.g-edit .b-card-word {
+    display:block;
+}
+.g-edit .b-card-word {
+    padding-top:0px;
+    padding:0px 10px;
+}
+.b-card-transcription-info {
+    display:none;
+}
+.g-edit .b-card-transcription-info {
+    display:block;
+    font-size:9px;
+    padding:0px 10px;
+    text-align:center;
+}
+.b-card-translate-info {
+    display:none;
+}
+.g-edit .b-card-translate-info {
+    display:block;
+    font-size:9px;
+    padding:0px 10px;
+    text-align:center;
+}
+.g-edit .b-card-transcription {
+    display:block;
+    padding-top:0px;
+    padding:0px 10px;
+    height:21px;
+}
+.g-edit .b-card-translate {
+    display:block;
+    padding:0px 10px;
+    height:21px;
 }
 .b-box-add {
     width:100%;
@@ -185,15 +242,6 @@ html,body {
     top:0px;
     right:24px;
 }
-.b-card-cancel {
-    display:block;
-    width:16px;
-    height:16px;
-    background:url(images/cancel.png) no-repeat;
-    position:absolute;
-    top:0px;
-    right:0px;
-}
 .b-card-accept {
     display:block;
     width:16px;
@@ -201,7 +249,7 @@ html,body {
     background:url(images/accept.png) no-repeat;
     position:absolute;
     top:0px;
-    right:24px;
+    right:0px;
 }
 .g-hidden {
     display:none;
