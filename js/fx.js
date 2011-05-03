@@ -120,7 +120,6 @@ function showRequest(formData, jqForm, options) {
   $.translate(queryString, "en", "ru", {
     complete:function(){
         var id = (parseInt(($.jStorage.index()).slice(-1)))+1;
-        console.log(id);
         var word = {word: queryString, transcription: "", translate: this.translation};
         var encoded = $.toJSON(word);
         $.jStorage.set(id,encoded);
@@ -164,6 +163,5 @@ function listw() {
       var transcription = $.evalJSON(w).transcription;
       var translate = $.evalJSON(w).translate;
       gener(word,transcription,translate,i);
-      console.log(word);
     });
 }
