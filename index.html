@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html lang="ru"> 
+  <head> 
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="styles.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="print.css" type="text/css" media="print" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js">
+    </script>
+    <script type="text/javascript" src="js/jstorage.js">
+    </script>
+    <script type="text/javascript" src="js/jtranslate.js">
+    </script>
+    <script type="text/javascript" src="js/jquery.form.js">
+    </script>
+    <script type="text/javascript" src="js/jquery.jeditable.js">
+    </script>
+    <script type="text/javascript" src="js/jquery.json.js">
+    </script>
+    <script type="text/javascript" src="js/fx.js">
+    </script>
+  </head>
+  <body id="main">
+    <div class="b-overlay g-hidden"></div>
+    <div class="b-box-add g-hidden">
+      <div class="b-box-add-mid">
+        <form id="addcard" class="b-add" method="post" action="#">
+          <div class="b-add-bor">
+            <input class="b-add-bor-word" type="text" name="word" onfocus="this.value=(this.value=='введите слово и нажмите ввод') ? '' : this.value" onblur="this.value=(this.value=='') ? 'введите слово и нажмите ввод' : this.value" value="введите слово и нажмите ввод" onKeyDown="limiter(this,'25');" onKeyUp="limiter(this,'25');" />
+            <a id="closebox" class="b-add-bor-close" href="#" title="закрыть"></a>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="b-box">
+      <div class="b-box-mid">
+        <div class="b-box-in">
+          <div class="b-button">
+            <a id="add" class="b-button-add" href="#" title="добавить карточку"></a>
+            <a id="print" class="b-button-print" href="#" title="распечатать карточки"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,256 @@
+* {
+    margin:0px;
+    padding:0px;
+    outline:0;
+    border:0;
+}
+html,body {
+    background:url(images/back.gif);
+    font:14px Arial, Helvetica, sans-serif;
+    color:#555;
+}
+.b-overlay {
+    height:100%;
+    width:100%;
+    background-color:#666;
+    opacity:0.3;
+    position:fixed;
+    top:0px;
+    left:0px;
+    z-index:90;
+}
+.b-card {
+    background:url(images/card.jpg) no-repeat right bottom;
+    float:left;
+    width:250px;
+    height:150px;
+    border:1px #e1ddd2 solid;
+    margin:20px 0px 0px 20px;
+    -moz-box-shadow:0px 0px 7px #a3a3a3;
+    -webkit-box-shadow:0px 0px 7px #a3a3a3;
+    box-shadow:0px 0px 7px #a3a3a3;
+    position:relative;
+}
+.b-card-box {
+    list-style:none;
+}
+.b-card:hover {
+    -moz-box-shadow:0px 0px 7px #555;
+    -webkit-box-shadow:0px 0px 7px #555;
+    box-shadow:0px 0px 7px #555;
+}
+.b-card.g-edit {
+    -moz-box-shadow:0px 0px 7px #555;
+    -webkit-box-shadow:0px 0px 7px #555;
+    box-shadow:0px 0px 7px #555;
+}
+.b-card-word {
+    text-align:center;
+    font:18px Georgia, serif;
+    padding-top:60px;
+}
+.b-card-word:first-letter {
+    text-transform:uppercase;
+}
+.b-card-transcription {
+    display:none;
+    text-align:center;
+    font:18px Georgia, serif;
+    padding-top:50px;
+}
+.b-card-translate {
+    display:none;
+    text-align:center;
+    font:18px Georgia, serif;
+    text-transform:lowercase;
+}
+.g-active .b-card-word {
+    display:none;
+}
+.g-active .b-card-transcription {
+    display:block;
+}
+.g-active .b-card-translate {
+    display:block;
+}
+.g-without-trans .b-card-transcription {
+    display:none;
+}
+.g-without-trans .b-card-translate {
+    padding-top:60px;
+}
+.b-card-info {
+    display:none;
+}
+.g-edit .b-card-info {
+    display:block;
+    font-size:9px;
+}
+.b-card-word-info {
+    display:none;
+}
+.g-edit .b-card-word-info {
+    display:block;
+    font-size:9px;
+    padding:0px 10px;
+    text-align:center;
+}
+.g-active.g-edit .b-card-word {
+    display:block;
+}
+.g-edit .b-card-word {
+    padding-top:0px;
+    padding:0px 10px;
+}
+.b-card-transcription-info {
+    display:none;
+}
+.g-edit .b-card-transcription-info {
+    display:block;
+    font-size:9px;
+    padding:0px 10px;
+    text-align:center;
+}
+.b-card-translate-info {
+    display:none;
+}
+.g-edit .b-card-translate-info {
+    display:block;
+    font-size:9px;
+    padding:0px 10px;
+    text-align:center;
+}
+.g-edit .b-card-transcription {
+    display:block;
+    padding-top:0px;
+    padding:0px 10px;
+    height:21px;
+}
+.g-edit .b-card-translate {
+    display:block;
+    padding:0px 10px;
+    height:21px;
+}
+.b-box-add {
+    width:100%;
+    height:100%;
+    position:fixed;
+    top:0px;
+    left:0px;
+    z-index:100;
+}
+.b-box-add-mid {
+    height:100%;
+    display:table;
+    margin:0 auto;
+}
+.b-add {
+    vertical-align:middle;
+    display:table-cell;
+}
+.b-add-bor {
+    border:4px #EDEDED solid;
+    border-radius:2px;
+    -moz-border-radius:2px;
+    -moz-box-shadow:0px 0px 7px #a3a3a3;
+    -webkit-box-shadow:0px 0px 7px #a3a3a3;
+    box-shadow:0px 0px 7px #a3a3a3;
+    position:relative;
+}
+.b-add-bor-word {
+    width:320px;
+    height:33px;
+    background-color:#FFF;
+    color:#CCC;
+    font-size:14px;
+    font-family:Tahoma, Geneva, sans-serif;
+    padding:0px 14px;
+    border:1px #C8C8C8 solid;
+    border-radius:2px;
+    -moz-border-radius:2px;
+    text-align:center;
+}
+.b-add-bor-word:focus {
+    color:#555;
+    background-color:#FFFAC2;
+}
+.b-add-bor-close {
+    width:30px;
+    height:30px;
+    background:url(images/closebox.png) no-repeat;
+    position:absolute;
+    right:-17px;
+    top:-15px;
+    z-index:110;
+}
+.b-box {
+    width:46px;
+    height:100%;
+    position:fixed;
+    top:0px;
+    right:0px;
+    z-index:50;
+}
+.b-box-mid {
+    height:100%;
+    display:table;
+    margin:0 auto;
+}
+.b-box-in {
+    vertical-align:middle;
+    display:table-cell;
+}
+.b-button {
+    background-color:#777;
+    width:46px;
+    height:92px;
+    border-radius:10px 0px 0px 10px;
+    -moz-border-radius:10px 0px 0px 10px;
+}
+.b-button:hover {
+    background-color:#888;
+}
+.b-button-add {
+    display:block;
+    width:32px;
+    height:32px;
+    background:url(images/plus.png) no-repeat center center;
+    padding:7px;
+}
+.b-button-print {
+    display:block;
+    width:32px;
+    height:32px;
+    background:url(images/print.png) no-repeat center center;
+    padding:7px;
+}
+.b-card-delete {
+    display:block;
+    width:16px;
+    height:16px;
+    background:url(images/delete.png) no-repeat;
+    position:absolute;
+    top:0px;
+    right:0px;
+}
+.b-card-edit {
+    display:block;
+    width:16px;
+    height:16px;
+    background:url(images/edit.png) no-repeat;
+    position:absolute;
+    top:0px;
+    right:24px;
+}
+.b-card-accept {
+    display:block;
+    width:16px;
+    height:16px;
+    background:url(images/accept.png) no-repeat;
+    position:absolute;
+    top:0px;
+    right:0px;
+}
+.g-hidden {
+    display:none;
+}
