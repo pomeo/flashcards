@@ -45,12 +45,28 @@ $(document).ready(function() {
         $(this).parent().find(".b-card-delete").hide();
         $(this).parent().find(".b-card-accept").removeClass("g-hidden");
         $(".g-edit > .b-card-box > .b-card-word").editable(function(value, settings) {
+            var id = $(this).closest(".b-card").attr("id").slice(2);
+            var w = $.jStorage.get(id);
+            var wd = $.evalJSON(w).word;
+            var transcription = $.evalJSON(w).transcription;
+            var translate = $.evalJSON(w).translate;
+            var word = {word: value, transcription: transcription, translate: translate};
+            var encoded = $.toJSON(word);
+            $.jStorage.set(id,encoded);
             return(value);
           }, { 
           tooltip: "Нажмите чтобы отредактировать"
               });
         $(".g-edit > .b-card-box > .b-card-transcription").editable(function(value, settings) {
             if (value) {
+              var id = $(this).closest(".b-card").attr("id").slice(2);
+              var w = $.jStorage.get(id);
+              var wd = $.evalJSON(w).word;
+              var transcription = $.evalJSON(w).transcription;
+              var translate = $.evalJSON(w).translate;
+              var word = {word: wd, transcription: value, translate: translate};
+              var encoded = $.toJSON(word);
+              $.jStorage.set(id,encoded);
               $(this).closest(".b-card").removeClass("g-without-trans");
             } else {
               $(this).closest(".b-card").addClass("g-without-trans");
@@ -60,6 +76,14 @@ $(document).ready(function() {
           tooltip: "Нажмите чтобы отредактировать"
               });
         $(".g-edit > .b-card-box > .b-card-translate").editable(function(value, settings) {
+            var id = $(this).closest(".b-card").attr("id").slice(2);
+            var w = $.jStorage.get(id);
+            var wd = $.evalJSON(w).word;
+            var transcription = $.evalJSON(w).transcription;
+            var translate = $.evalJSON(w).translate;
+            var word = {word: wd, transcription: transcription, translate: value};
+            var encoded = $.toJSON(word);
+            $.jStorage.set(id,encoded);
             return(value);
           }, { 
           tooltip: "Нажмите чтобы отредактировать"
@@ -108,8 +132,10 @@ function showRequest(formData, jqForm, options) {
 }
 
 function gener(a, b, c, id) {
+  var wo = '';
   if (!b) {
     b = '';
+    wo = 'g-without-trans';
   }
   if (!c) {
     c = '';
@@ -118,9 +144,9 @@ function gener(a, b, c, id) {
     id = '';
   }
   if ($(".b-card:first").length) {
-    $("<div id=\"id" + id + "\" class=\"b-card g-without-trans\"><ul class=\"b-card-box\"><li class=\"b-card-info\">Чтобы отредактировать кликните на слово, после изменений нажмите ввод. Когда закончите нажмите на зеленый значок справа вверху</li><li class=\"b-card-word-info\">слово</li><li class=\"b-card-word\">" + a + "</li><li class=\"b-card-transcription-info\">транскрипция</li><li class=\"b-card-transcription\">" + b + "</li><li class=\"b-card-translate-info\">перевод</li><li class=\"b-card-translate\">" + c + "</li></ul><a class=\"b-card-edit g-hidden\" href=\"#\" title=\"редактировать карту\"></a><a class=\"b-card-delete g-hidden\" href=\"#\" title=\"удалить карту\"></a><a class=\"b-card-accept g-hidden\" href=\"#\" title=\"сохранить\"></a></div>").fadeIn(700).insertBefore(".b-card:first");
+    $("<div id=\"id" + id + "\" class=\"b-card " + wo + "\"><ul class=\"b-card-box\"><li class=\"b-card-info\">Чтобы отредактировать кликните на слово, после изменений нажмите ввод. Когда закончите нажмите на зеленый значок справа вверху</li><li class=\"b-card-word-info\">слово</li><li class=\"b-card-word\">" + a + "</li><li class=\"b-card-transcription-info\">транскрипция</li><li class=\"b-card-transcription\">" + b + "</li><li class=\"b-card-translate-info\">перевод</li><li class=\"b-card-translate\">" + c + "</li></ul><a class=\"b-card-edit g-hidden\" href=\"#\" title=\"редактировать карту\"></a><a class=\"b-card-delete g-hidden\" href=\"#\" title=\"удалить карту\"></a><a class=\"b-card-accept g-hidden\" href=\"#\" title=\"сохранить\"></a></div>").fadeIn(700).insertBefore(".b-card:first");
   } else {
-    $("<div id=\"id" + id + "\" class=\"b-card g-without-trans\"><ul class=\"b-card-box\"><li class=\"b-card-info\">Чтобы отредактировать кликните на слово, после изменений нажмите ввод. Когда закончите нажмите на зеленый значок справа вверху</li><li class=\"b-card-word-info\">слово</li><li class=\"b-card-word\">" + a + "</li><li class=\"b-card-transcription-info\">транскрипция</li><li class=\"b-card-transcription\">" + b + "</li><li class=\"b-card-translate-info\">перевод</li><li class=\"b-card-translate\">" + c + "</li></ul><a class=\"b-card-edit g-hidden\" href=\"#\" title=\"редактировать карту\"></a><a class=\"b-card-delete g-hidden\" href=\"#\" title=\"удалить карту\"></a><a class=\"b-card-accept g-hidden\" href=\"#\" title=\"сохранить\"></a></div>").fadeIn(700).insertAfter(".b-box");
+    $("<div id=\"id" + id + "\" class=\"b-card " + wo + "\"><ul class=\"b-card-box\"><li class=\"b-card-info\">Чтобы отредактировать кликните на слово, после изменений нажмите ввод. Когда закончите нажмите на зеленый значок справа вверху</li><li class=\"b-card-word-info\">слово</li><li class=\"b-card-word\">" + a + "</li><li class=\"b-card-transcription-info\">транскрипция</li><li class=\"b-card-transcription\">" + b + "</li><li class=\"b-card-translate-info\">перевод</li><li class=\"b-card-translate\">" + c + "</li></ul><a class=\"b-card-edit g-hidden\" href=\"#\" title=\"редактировать карту\"></a><a class=\"b-card-delete g-hidden\" href=\"#\" title=\"удалить карту\"></a><a class=\"b-card-accept g-hidden\" href=\"#\" title=\"сохранить\"></a></div>").fadeIn(700).insertAfter(".b-box");
   }
 }
 
